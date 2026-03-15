@@ -3,12 +3,12 @@
 Requires docker
 
 ```bash
-docker buildx build --load -t vulnerable-nginx:latest .
-docker run --name vulnerable-nginx -p 8080:8080 -d vulnerable-nginx
+docker buildx build --load -t hardened-nginx:latest .
+docker run --name hardened-nginx -p 8080:8080 -d hardened-nginx
 trivy image --vuln-severity-source nvd,auto \
     --ignore-unfixed \
     --severity CRITICAL,HIGH \
-    vulnerable-nginx:latest \
+    hardened-nginx:latest \
     -f table
 ```
 
