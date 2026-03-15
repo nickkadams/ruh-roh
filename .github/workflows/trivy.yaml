@@ -24,10 +24,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # @v6.0.2
 
-    - name: Run Trivy vulnerability scanner in fs mode
+    # - name: Run Trivy vulnerability scanner in config mode
+    #   uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # @v0.35.0
+    #   with:
+    #     scan-type: 'config'
+    #     scan-ref: 'docker/'
+    #     trivy-config: trivy.yaml
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # @v4
+    
+    - name: Build hardened image
+      uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294 # @v7
+      with:
+        context: docker/hardened
+        push: false
+        tags: latest
+
+    - name: Run Trivy vulnerability scanner in vuln mode
       uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # @v0.35.0
       with:
-        scan-type: 'fs'
         scan-ref: 'docker/'
         trivy-config: trivy.yaml
 
