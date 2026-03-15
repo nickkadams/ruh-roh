@@ -32,7 +32,7 @@ jobs:
         uses: bridgecrewio/checkov-action@99bb2caf247dfd9f03cf984373bc6043d4e32ebf # @v12.1347.0
         with:
           directory: terraform/
-          output_format: cli,sarif
+          output_format: cli # sarif
           # output_file_path: results.sarif
 
       # - name: Upload SARIF file
