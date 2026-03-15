@@ -10,7 +10,7 @@ resource "aws_rds_cluster" "hardened" {
 
   iam_database_authentication_enabled = true
   storage_encrypted                   = true
-  kms_key_id                          = "arn:aws:kms:us-east-1:123456789012:key/b8b4d93b-16fb-4d58-b5fd-e0c4535f3175"
+  kms_key_id                          = "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab"
   copy_tags_to_snapshot               = true
   enabled_cloudwatch_logs_exports     = ["audit", "error", "general", "slowquery", "postgresql"]
   deletion_protection                 = true

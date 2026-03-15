@@ -1,0 +1,17 @@
+# ============================================================================ #
+# Checkov config file example                                                #
+# ============================================================================ #
+
+# Use 'compact: true' to get a more concise output
+# compact: true
+
+# Equivalent to the --directory CLI argumen
+directory: terraform/
+
+# Equivalent to the --output CLI argument
+output:
+  - cli
+  - sarif
+
+# Equivalent to the --output-file-path CLI argument
+output-file-path: ./results
