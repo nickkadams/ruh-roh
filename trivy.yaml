@@ -1,0 +1,33 @@
+timeout: 15m0s
+format: sarif # json
+exit-code: 0
+quiet: true
+output: results/trivy-results.sarif
+# cache:
+#   dir: '${{ github.workspace }}/.cache/trivy'
+severity:
+  # - UNKNOWN
+  - LOW
+  - MEDIUM
+  - HIGH
+  - CRITICAL
+scan:
+  # skip-dirs:
+  #   - /lib64
+  #   - /lib
+  #   - /usr/lib
+  #   - /usr/include
+  scanners:
+    - vuln
+    # - license
+vulnerability:
+  ignore-unfixed: true
+  # Ref: https://trivy.dev/docs/v0.68/guide/scanner/vulnerability/#severity-selection
+  # Ref: https://github.com/aquasecurity/trivy/issues/8180
+  severity-source:
+    - nvd
+    - auto
+pkg:
+  types:
+   - os
+   - library

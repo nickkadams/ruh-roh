@@ -10,7 +10,7 @@ directory: terraform/
 
 # Equivalent to the --output CLI argument
 output:
-  - cli
+  # - cli
   - sarif
 
 # Equivalent to the --output-file-path CLI argument
