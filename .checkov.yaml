@@ -15,3 +15,6 @@ output:
 
 # Equivalent to the --output-file-path CLI argument
 output-file-path: ./results
+
+# Equivalent to the --soft-fail CLI argument
+soft-fail: true
