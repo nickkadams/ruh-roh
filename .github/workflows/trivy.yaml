@@ -38,8 +38,10 @@ jobs:
       uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294 # @v7
       with:
         context: docker/hardened
+        outputs: type=cacheonly
         push: false
         tags: hardened-nginx:latest
+        builder: ${{ steps.buildx.outputs.name }}
 
     - name: Run Trivy vulnerability scanner in vuln mode for hardened-nginx
       uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # @v0.35.0
@@ -51,8 +53,10 @@ jobs:
       uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294 # @v7
       with:
         context: docker/vulnerable
+        outputs: type=cacheonly        
         push: false
         tags: vulnerable-nginx:latest
+        builder: ${{ steps.buildx.outputs.name }}        
 
     - name: Run Trivy vulnerability scanner in vuln mode for vulnerable-nginx
       uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # @v0.35.0
