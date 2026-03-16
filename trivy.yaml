@@ -1,5 +1,5 @@
 timeout: 15m0s
-format: table # sarif # json
+format: sarif
 exit-code: 0
 quiet: false
 output: results/trivy-results.sarif
