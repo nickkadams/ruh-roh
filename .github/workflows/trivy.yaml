@@ -43,11 +43,11 @@ jobs:
         tags: hardened-nginx:latest
         builder: ${{ steps.buildx.outputs.name }}
 
-    - name: Run Trivy vulnerability scanner in vuln mode for hardened-nginx
-      uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # @v0.35.0
-      with:
-        image-ref: 'hardened-nginx:latest'
-        trivy-config: trivy.yaml
+    # - name: Run Trivy vulnerability scanner in vuln mode for hardened-nginx
+    #   uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # @v0.35.0
+    #   with:
+    #     image-ref: 'hardened-nginx:latest'
+    #     trivy-config: trivy.yaml
 
     - name: Build vulnerable-nginx image
       uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294 # @v7
@@ -58,11 +58,18 @@ jobs:
         tags: vulnerable-nginx:latest
         builder: ${{ steps.buildx.outputs.name }}        
 
+    # - name: Run Trivy vulnerability scanner in vuln mode for vulnerable-nginx
+    #   uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # @v0.35.0
+    #   with:
+    #     image-ref: 'vulnerable-nginx:latest'
+    #     trivy-config: trivy.yaml        
+
     - name: Run Trivy vulnerability scanner in vuln mode for vulnerable-nginx
       uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # @v0.35.0
       with:
-        image-ref: 'vulnerable-nginx:latest'
-        trivy-config: trivy.yaml        
+        scan-type: 'fs'
+        scan-ref: 'docker/'
+        trivy-config: trivy.yaml    
 
     # - name: Upload SARIF file
     #   uses: github/codeql-action/upload-sarif@0d579ffd059c29b07949a3cce3983f0780820c98 # @v4.32.6
