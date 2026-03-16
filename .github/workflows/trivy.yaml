@@ -40,6 +40,7 @@ jobs:
         context: docker/hardened
         outputs: type=cacheonly
         push: false
+        load: true
         tags: hardened-nginx:latest
         # builder: ${{ steps.buildx.outputs.name }}
 
@@ -49,13 +50,14 @@ jobs:
         context: docker/vulnerable
         outputs: type=cacheonly        
         push: false
+        load: true
         tags: vulnerable-nginx:latest
         # builder: ${{ steps.buildx.outputs.name }}
 
     - name: Setup trivy
       id: setup-trivy
       run: |
-        # VERSION=0.68.2 # Specify desired trivy version
+        # VERSION=0.69.3 # Specify desired trivy version
         wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
         echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
         sudo apt-get update
